@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/tile">
+        <file>tile_plugin.json</file>
+    </qresource>
+</RCC>

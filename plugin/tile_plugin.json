@@ -1,0 +1,9 @@
+{
+    "Keys": ["tile"],
+    "Provider": "tile",
+    "Version": 100,
+    "Experimental": false,
+    "Features": [
+        "OfflineMappingFeature"
+    ]
+}
