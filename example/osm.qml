@@ -58,27 +58,22 @@ ApplicationWindow {
         id: map_plugin
         name: "tile"
         PluginParameter{
-            id: para_mapname
             name: "tile.mapping.name"
             value: "My Custom Map"
         }
         PluginParameter{
-            id: para_tile_prefix
             name: "tile.mapping.tile_prefix"
             value: "osm_100-l-1-"
         }
         PluginParameter{
-            id: para_minzoomlevel
             name: "tile.mapping.minzoomlevel"
             value: 5
         }
         PluginParameter{
-            id: para_maxzoomlevel
             name: "tile.mapping.maxzoomlevel"
             value: 14
         }
         PluginParameter{
-            id: para_directory
             name: "tile.mapping.cache.directory"
             value: "D:\\git-repository\\tile\\example\\cache\\osm"
         }

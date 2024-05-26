@@ -260,8 +260,8 @@ QGeoTileSpec GeoFileTileCacheTile::filenameToTileSpec(const QString &filename) c
     if (length != 3 && length != 4)
         return emptySpec;
 
-    /*if(fields.at(0).toInt() < m_engine->preCacheZoomLevel())
-        return emptySpec;*/
+    if(fields.at(0).toInt() < m_engine->preCacheZoomLevel())
+        return emptySpec;
 
     QList<int> numbers;
 
