@@ -56,7 +56,7 @@ cmake --build . --config Release --target all
 **tile**插件现在安装在<YOUR_QT_SDK_DIR_PATH>/plugins/geoservices目录下。
 
 
-+ 运行exaple
++ 运行example
 
 将example/cache目录下的测试瓦片文件解压到当前目录下。
 
