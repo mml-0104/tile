@@ -1,14 +1,13 @@
 # Offline stroage tile map plugin for QtLocation
+<p align="center">
+English | <a href="README_zh_CN.md">简体中文</a>
+</p>
 
 Offline tile map plugin based on WebMercator projection, using datum WGS84.
+
 + Demo-OSM
 <div align=center>
   <img src="example/preview/osm.gif">
-</div>
-
-+ Demo-Tianditu
-<div align=center>
-  <img src="example/preview/tianditu.gif">
 </div>
 
 + Support for **Windows**, **Linux**, **Android**, **MacOS** etc.
@@ -26,7 +25,7 @@ Offline tile map plugin based on WebMercator projection, using datum WGS84.
 | tile.mapping.maxzoomlevel | The maximum scaling level of offline tiles is 19 by default and largest 25 level |
 | tile.mapping.precachezoomlevel | Initializes the zoom level of loaded offline tiles to increase the speed at which maps are first displayed. The default is 0 |
 | tile.mapping.cache.directory | Cache directory of offline tiles |
-| tile.mapping.cache.hierarchy | Directory hierarchy of an offline tile. The default value is 0<br> 0: cache/{prefix}{z}-{x}-{y}.{image}<br>1: cache/{z}/{x}-{y}.{image}<br>2: cache/{z}/{x}/{y}.{image}<br>3: cache/{z}/{y}/{x}.{image}<br> |
+| tile.mapping.cache.hierarchy | Directory hierarchy of an offline tile. The default value is 0<br> 0: cache/{prefix}{z}-{x}-{y}.{image}<br>1: cache/{z}/{x}-{y}.{image}<br>2: cache/{z}/{x}/{y}.{image}<br>3: cache/{z}/{y}/{x}.{image} |
 | tile.mapping.tile_prefix | This parameter is used when hierarchy is 0 and is compatible with the default cache tile file name that displays QtLocation. The prefix is before zxy. for example:<br>osm_100-l-4-2-3.png -> tile_prefix:osm_100-l-4 |
 
 ## Get started
@@ -62,17 +61,18 @@ The **tile** plugin is now installed in the <YOUR_QT_SDK_DIR_PATH>/plugins/geose
 
 Decompress the test tile file in the example/cache directory to the current directory.
 
-Modify the PluginParameter named **tile.mapping.cache.directory**  in the **osm.qml** or **tianditu.qml** file using the decompression path described above.
+Modify the PluginParameter named **tile.mapping.cache.directory**  in the **osm.qml**  file using the decompression path described above.
 ```qml
+//osm.qml
 PluginParameter{
 	name: "tile.mapping.cache.directory"
-	value: "<YOUR_REPOSITORY_DIR>/tile/example/cache/osm"    //osm.qml
-	//value: "<YOUR_REPOSITORY_DIR>/tile/example/cache/tianditu" //tianditu.qml
+	value: "<YOUR_REPOSITORY_DIR>/tile/example/cache/osm"    
 }
 ```
 
 Modify the macro definition switch test tile set in main.cpp
 ```c++
+//main.cpp
 #if 1 //0: osm test  1:tianditu test
     engine.load(QUrl(QStringLiteral("qrc:/tianditu.qml")));
 #else
@@ -91,8 +91,7 @@ Modify the macro definition switch test tile set in main.cpp
 + Donate
 <div align=center>
   <img src="example/donate/Alipay.png">
-  <img src="example/donate/Wechat.png">
 </div>
 <div align=center>
-Buy the author a cup of coffee
+Buy the author a cup of coffee（Alipay）
 </div>
