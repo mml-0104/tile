@@ -17,8 +17,10 @@ Offline tile map plugin based on WebMercator projection, using datum WGS84.
 + Bulit with Qt6.5.3 or higher(only CMake supported).
 + Offline maps directly use GPS latitude and longitude coordinates without conversion.
 + Only one map type is available(The map id is fixed to 1), please use multiple plugin instances for multiple map layers, refer to example.
+
+## Parameters
 | Parameter | Description |
-|--------|--------|
+|-------|-------|
 | tile.mapping.name | Custom map name |
 | tile.mapping.minzoomlevel | The minimum zoom level for offline tiles, default 0 |
 | tile.mapping.maxzoomlevel | The maximum scaling level of offline tiles is 19 by default and largest 25 level |
@@ -83,6 +85,7 @@ Modify the macro definition switch test tile set in main.cpp
 + Great! Now you are ready to use **tile** plugin in your qt project, good lucky.
 # Reference
 [**qtlocation**: The srouce code for QtLocation](https://github.com/qt/qtlocation)
+
 [**java_map_download**: Offline map downloader](https://gitcode.com/kurimuson/java_map_download/overview)
 
 + Donate
