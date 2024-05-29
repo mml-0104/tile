@@ -155,7 +155,7 @@ MapView {
 # 参考
 [**qtlocation**: QtLocation源代码](https://github.com/qt/qtlocation)
 
-[**java_map_download**: Offline map downloader](https://gitcode.com/kurimuson/java_map_download/overview)
+[**java_map_download**: 离线地图下载器](https://gitcode.com/kurimuson/java_map_download/overview)
 
 + 打赏作者
 <div align=center>
