@@ -80,7 +80,7 @@ ApplicationWindow {
         CheckBox {
             id: check_annotation
             anchors.centerIn: parent
-            text: "Annotation"
+            text: "显示注记" //Annotation
             checked: true
         }
     }

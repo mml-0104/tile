@@ -9,11 +9,12 @@ Offline tile map plugin based on WebMercator projection, using datum WGS84.
 <div align=center>
   <img src="example/preview/osm.gif">
 </div>
+<p>（GIF file is large, may load slowly, if not displayed, view <a href="example/preview/osm.gif">osm.gif</a>）</p>
 
 + Support for **Windows**, **Linux**, **Android**, **MacOS** etc.
 + Support for **OSM**, **Google**, **Bing**, **Amap**, **Tianditu** and other offline tile maps.
 + Support map tilt, bearing etc.
-+ Bulit with Qt6.5.3 or higher(only CMake supported).
++ Tile plugin bulit with Qt6.5.3 or higher(only CMake supported).
 + Offline maps directly use GPS latitude and longitude coordinates without conversion.
 + Only one map type is available(The map id is fixed to 1), please use multiple plugin instances for multiple map layers, refer to example.
 
@@ -49,7 +50,7 @@ cmake --build . --config Release --target all
 
 or
 
-Use your IDE (`Qt Creator` is recommended) to open the project and build. (only **CMake** supported).
+Use your IDE (`Qt Creator` is recommended) to open the project and build. (The plugin and examples are built using **CMake**).
 <div align=center>
   <img src="example/preview/qt_creator_project.png">
 </div>
@@ -73,7 +74,7 @@ PluginParameter{
 Modify the macro definition switch test tile set in main.cpp
 ```c++
 //main.cpp
-#if 1 //0: osm test  1:tianditu test
+#if 0 //0: osm test  1:tianditu test
     engine.load(QUrl(QStringLiteral("qrc:/tianditu.qml")));
 #else
     engine.load(QUrl(QStringLiteral("qrc:/osm.qml")));
@@ -83,6 +84,72 @@ Modify the macro definition switch test tile set in main.cpp
 + Compile the project. Then try to execute the `example` demo program.
 
 + Great! Now you are ready to use **tile** plugin in your qt project, good lucky.
+
+## Use plugin in your Qt project
+1. Download or use an existing offline map tile file，The directory hierarchy of the file needs to be the way the plugin supports it.
+
+2. Find the latitude and longitude(Datum WGS84)  of any location within the offline map (preferably at or near the center point).
+
+3. Load your offline map in your Qt project (qmake or cmake): 
+```qml
+Window {
+    id: window
+    width: Qt.platform.os === "android" ? Screen.width : 1024
+    height: Qt.platform.os === "android" ? Screen.height : 768
+    
+    property var center: QtPositioning.coordinate(59.9485,10.7686) //Oslo
+
+    MapView {
+        id: view
+        anchors.fill: parent
+        map.plugin: map_plugin
+        map.center: window.center
+        map.zoomLevel: 3
+    }
+
+    Plugin {
+        id: map_plugin
+        name: "tile"
+        PluginParameter{
+            name: "tile.mapping.name"
+            value: "Your Custom Map Name"
+        }
+        PluginParameter{
+            name: "tile.mapping.minzoomlevel"
+            value: <YOUR_OFFLINE_MAP_MINZOOMLEVEL>
+        }
+        PluginParameter{
+            name: "tile.mapping.maxzoomlevel"
+            value: <YOUR_OFFLINE_MAP_MAXZOOMLEVEL>
+        }
+        PluginParameter{
+            name: "tile.mapping.cache.directory"
+            value: <YOUR_OFFLINE_TILE_DIRECTORY_PATH>
+        }
+        PluginParameter{
+            name: "tile.mapping.cache.hierarchy"
+            value: <YOUR_OFFLINE_TILE_HIERARCHY>
+        }
+        PluginParameter{
+            name: "tile.mapping.precachezoomlevel"
+            value: view.map.zoomLevel
+        }
+    }
+}
+```
+4. Depending on the type of application, decide whether to allow over zooming of the map。Use the following code to disable overzooming of the map：
+```qml
+MapView {
+	id: view
+	Component.onCompleted: {
+		map.minimumZoomLevel=map.activeMapType.cameraCapabilities.minimumZoomLevel
+		map.maximumZoomLevel=map.activeMapType.cameraCapabilities.maximumZoomLevel
+}
+```
+
+
+5. Limit map boundaries in your QML application to ensure that map movement/zooming does not exceed the range of the offline tile, so as not to cause a poor user experience.
+
 # Reference
 [**qtlocation**: The srouce code for QtLocation](https://github.com/qt/qtlocation)
 
@@ -91,7 +158,9 @@ Modify the macro definition switch test tile set in main.cpp
 + Donate
 <div align=center>
   <img src="example/donate/Alipay.png">
+  <img src="example/donate/Wechat.png">
 </div>
 <div align=center>
-Buy the author a cup of coffee（Alipay）
+(Alipay)&nbsp;&nbsp;|&nbsp;&nbsp;(Wechat)</br>
+♥Buy the author a cup of coffee♥
 </div>

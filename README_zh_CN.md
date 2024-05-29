@@ -6,11 +6,13 @@
 <div align=center>
   <img src="example/preview/tianditu.gif">
 </div>
+<p>（GIF文件较大，可能加载较慢，如无法显示，查看 <a href="example/preview/tianditu.gif">tianditu.gif</a>）</p>
+
 
 + 支持**Windows**, **Linux**, **Android**, **MacOS**等。
 + 支持**OSM**, **Google**, **Bing**, **Amap**, **Tianditu**以及其他离线瓦片地图。
 + 支持地图倾斜、方位转动。
-+ 使用Qt6.5.3或更高版本构建(仅支持CMake)。
++ 插件使用Qt6.5.3或更高版本构建(仅支持CMake)。
 + 离线地图直接使用GPS经纬度坐标，无需转换。
 + 只有一种地图类型可用(地图id固定为1)，多个地图图层时请使用多个插件实例，参考示例example。
 
@@ -25,7 +27,7 @@
 | tile.mapping.cache.hierarchy | 离线地图瓦片的目录层次结构. 默认值为0 <br> 0: cache/{prefix}{z}-{x}-{y}.{image} <br> 1: cache/{z}/{x}-{y}.{image} <br> 2: cache/{z}/{x}/{y}.{image} <br> 3: cache/{z}/{y}/{x}.{image} |
 | tile.mapping.tile_prefix | 当hierarchy为0时使用此参数，用于兼容显示QtLocation的默认缓存瓦片文件，zxy之前的前缀. 例如:<br>osm_100-l-4-2-3.png -> tile_prefix:osm_100-l-4 |
 
-## 开始使用
+## 快速开始
 
 + 克隆此仓库。.
 
@@ -46,7 +48,7 @@ cmake --build . --config Release --target all
 
 或者
 
-使用IDE(推荐使用``Qt Creato``)打开项目并进行构建。(仅支持**CMake**)。
+使用IDE(推荐使用``Qt Creato``)打开项目并进行构建。(插件和示例使用**CMake**构建)。
 
 
 <div align=center>
@@ -84,10 +86,76 @@ main.cpp
 
 + 非常好！现在你已经准备好在你的Qt项目中使用**tile**插件了，祝你好运。 
 
+## 在你的Qt工程中使用插件
+
+1. 下载或使用已有的离线地图瓦片文件，文件的目录层次结构需是插件支持的方式。
+
+2. 找到离线地图范围内任意位置的（最好是中心点或附近点）的经纬度（WGS84坐标系）。
+
+3. 在你的Qt工程（qmake或cmake）中加载你的离线地图：
+```qml
+Window {
+    id: window
+    width: Qt.platform.os === "android" ? Screen.width : 1024
+    height: Qt.platform.os === "android" ? Screen.height : 768
+    
+    property var center: QtPositioning.coordinate(30.531389, 114.313833) //武汉市
+
+    MapView {
+        id: view
+        anchors.fill: parent
+        map.plugin: map_plugin
+        map.center: window.center
+        map.zoomLevel: 3
+    }
+
+    Plugin {
+        id: map_plugin
+        name: "tile"
+        PluginParameter{
+            name: "tile.mapping.name"
+            value: "Your Custom Map Name"
+        }
+        PluginParameter{
+            name: "tile.mapping.minzoomlevel"
+            value: <YOUR_OFFLINE_MAP_MINZOOMLEVEL>
+        }
+        PluginParameter{
+            name: "tile.mapping.maxzoomlevel"
+            value: <YOUR_OFFLINE_MAP_MAXZOOMLEVEL>
+        }
+        PluginParameter{
+            name: "tile.mapping.cache.directory"
+            value: <YOUR_OFFLINE_TILE_DIRECTORY_PATH>
+        }
+        PluginParameter{
+            name: "tile.mapping.cache.hierarchy"
+            value: <YOUR_OFFLINE_TILE_HIERARCHY>
+        }
+        PluginParameter{
+            name: "tile.mapping.precachezoomlevel"
+            value: view.map.zoomLevel
+        }
+    }
+}
+```
+4. 根据应用类型，决定是否允许地图过量缩放。使用以下代码禁用地图过量缩放：
+```qml
+MapView {
+	id: view
+	Component.onCompleted: {
+		map.minimumZoomLevel=map.activeMapType.cameraCapabilities.minimumZoomLevel
+		map.maximumZoomLevel=map.activeMapType.cameraCapabilities.maximumZoomLevel
+}
+```
+
+
+5. 在你QML应用程序中限制地图的边界，保证地图移动/缩放时不超出离线瓦片的范围，以免造成用户体验不佳。
+
 # 参考
 [**qtlocation**: QtLocation源代码](https://github.com/qt/qtlocation)
 
-[**java_map_download**: 离线地图下载器](https://gitcode.com/kurimuson/java_map_download/overview)
+[**java_map_download**: Offline map downloader](https://gitcode.com/kurimuson/java_map_download/overview)
 
 + 打赏作者
 <div align=center>
