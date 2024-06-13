@@ -25,7 +25,7 @@
 | tile.mapping.precachezoomlevel | 初始化加载离线地图的缩放级别，以提高地图首次显示的速度。默认值为0 |
 | tile.mapping.cache.directory | 离线地图瓦片的缓存目录 |
 | tile.mapping.cache.hierarchy | 离线地图瓦片的目录层次结构. 默认值为0 <br> 0: cache/{prefix}{z}-{x}-{y}.{image} <br> 1: cache/{z}/{x}-{y}.{image} <br> 2: cache/{z}/{x}/{y}.{image} <br> 3: cache/{z}/{y}/{x}.{image} |
-| tile.mapping.tile_prefix | 当hierarchy为0时使用此参数，用于兼容显示QtLocation的默认缓存瓦片文件，zxy之前的前缀. 例如:<br>osm_100-l-4-2-3.png -> tile_prefix:osm_100-l-4 |
+| tile.mapping.tile_prefix | 当hierarchy为0时使用此参数，用于兼容显示QtLocation的默认缓存瓦片文件，zxy之前的前缀. 例如:<br>osm_100-l-4-2-3.png -> tile_prefix:osm_100-l- |
 
 ## 快速开始
 
@@ -48,7 +48,7 @@ cmake --build . --config Release --target all
 
 或者
 
-使用IDE(推荐使用``Qt Creato``)打开项目并进行构建。(插件和示例使用**CMake**构建)。
+使用IDE(推荐使用``Qt Creator``)打开项目并进行构建。(插件和示例使用**CMake**构建)。
 
 
 <div align=center>
