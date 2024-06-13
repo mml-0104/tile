@@ -27,7 +27,7 @@ Offline tile map plugin based on WebMercator projection, using datum WGS84.
 | tile.mapping.precachezoomlevel | Initializes the zoom level of loaded offline tiles to increase the speed at which maps are first displayed. The default is 0 |
 | tile.mapping.cache.directory | Cache directory of offline tiles |
 | tile.mapping.cache.hierarchy | Directory hierarchy of an offline tile. The default value is 0<br> 0: cache/{prefix}{z}-{x}-{y}.{image}<br>1: cache/{z}/{x}-{y}.{image}<br>2: cache/{z}/{x}/{y}.{image}<br>3: cache/{z}/{y}/{x}.{image} |
-| tile.mapping.tile_prefix | This parameter is used when hierarchy is 0 and is compatible with the default cache tile file name that displays QtLocation. The prefix is before zxy. for example:<br>osm_100-l-4-2-3.png -> tile_prefix:osm_100-l-4 |
+| tile.mapping.tile_prefix | This parameter is used when hierarchy is 0 and is compatible with the default cache tile file name that displays QtLocation. The prefix is before zxy. for example:<br>osm_100-l-4-2-3.png -> tile_prefix:osm_100-l- |
 
 ## Get started
 
